@@ -2,7 +2,7 @@
 
 {% block content %}
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header class=" py-5" style="background-color: #1c3650;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">{{ category_name }}</h1>
@@ -10,6 +10,8 @@
             </div>
         </div>
     </header>
+
+
     <!-- Section-->
     <section class="py-5">
         <div class="container px-4 px-lg-5 mt-5">
@@ -19,7 +21,9 @@
                         <div class="card h-100">
                             <!-- Sale badge -->
                             {% if product.is_sale %}
-                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                <div class="badge bg-dark text-white position-absolute"
+                                     style="top: 0.5rem; right: 0.5rem">Sale
+                                </div>
                             {% endif %}
                             <!-- Product image -->
                             <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}"/>
@@ -44,7 +48,8 @@
                             <!-- Product actions -->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View Product</a>
+                                    <a class="btn btn-outline-dark mt-auto" href="{% url 'product' product.id %}">View
+                                        Product</a>
                                 </div>
                             </div>
                         </div>

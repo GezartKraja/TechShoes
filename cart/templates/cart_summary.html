@@ -2,7 +2,7 @@
 
 {% block content %}
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <header class=" py-5" style="background-color: #1c3650;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
                 <h1 class="display-4 fw-bolder">Shopping Cart</h1>
@@ -10,13 +10,15 @@
             </div>
         </div>
     </header>
-    <div class="container">
+    <br><br><br>
+    <div class="container mx-auto">
         {% if cart_product %}
             {% for product in cart_product %}
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4 align-self-center">
-                            <img src="{{ product.image.url }}" class="img-fluid rounded-start mx-auto d-block" alt="{{ product.name }}">
+                            <img src="{{ product.image.url }}" class="img-fluid rounded-start mx-auto d-block"
+                                 alt="{{ product.name }}">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body text-center">
@@ -24,7 +26,9 @@
                                 <p class="card-text">{{ product.description }}</p>
 
                                 {% if product.is_sale %}
-                                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                    <div class="badge bg-dark text-white position-absolute"
+                                         style="top: 0.5rem; right: 0.5rem">Sale
+                                    </div>
                                     <strike>${{ product.price }}</strike>&nbsp;&nbsp;
                                     ${{ product.sale_price }}
                                 {% else %}
@@ -51,15 +55,19 @@
                                     </div>
                                 </div>
                                 <br><br>
-                                <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
-                                <button type="button" data-index="{{ product.id }}" class="btn btn-secondary update-cart">Update</button>
-                                <button type="button" data-index="{{ product.id }}" class="btn btn-danger delete-product">Delete</button>
+                                <a href="{% url 'home' %}" class="btn btn-primary" style="background-color: #326b9e;">Home</a>
+                                <button type="button" data-index="{{ product.id }}" class="btn btn-primary update-cart"
+                                        style="background-color:green;">Update
+                                </button>
+                                <button type="button" data-index="{{ product.id }}"
+                                        class="btn btn-danger delete-product">Delete
+                                </button>
 
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
             {% endfor %}
             <h3>Total: ${{ totals }} </h3>
             <br><br>
@@ -70,53 +78,52 @@
     </div>
     <br><br>
 
-<script>
-// Update Cart 
-    $(document).on('click', '.update-cart', function (e) {
-        e.preventDefault();
-        var productid = $(this).data('index');
-        var quantity = $('#select' + productid).val(); // Correctly select the quantity
+    <script>
+        // Update Cart 
+        $(document).on('click', '.update-cart', function (e) {
+            e.preventDefault();
+            var productid = $(this).data('index');
+            var quantity = $('#select' + productid).val(); // Correctly select the quantity
 
-        $.ajax({
-            type: 'POST',
-            url: '{% url "cart_update" %}',
-            data: {
-                product_id: productid,
-                product_qty: quantity,
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-                action: 'post'
-            },
-            success: function (json) {
-                location.reload();
-            },
-            error: function (xhr, errmsg, err) {
-                console.error(errmsg);
-            }
+            $.ajax({
+                type: 'POST',
+                url: '{% url "cart_update" %}',
+                data: {
+                    product_id: productid,
+                    product_qty: quantity,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+                success: function (json) {
+                    location.reload();
+                },
+                error: function (xhr, errmsg, err) {
+                    console.error(errmsg);
+                }
+            });
         });
-    });
-    
-    
-    
- // Delete item from Cart 
-    $(document).on('click', '.delete-product', function (e) {
-        e.preventDefault();
 
-        $.ajax({
-            type: 'POST',
-            url: '{% url "cart_delete" %}',
-            data: {
-                product_id: $(this).data('index'),
-                csrfmiddlewaretoken: '{{ csrf_token }}',
-                action: 'post'
-            },
-            success: function (json) {
-                location.reload();
-            },
-            error: function (xhr, errmsg, err) {
-                console.error(errmsg);
-            }
+
+        // Delete item from Cart 
+        $(document).on('click', '.delete-product', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'POST',
+                url: '{% url "cart_delete" %}',
+                data: {
+                    product_id: $(this).data('index'),
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+                success: function (json) {
+                    location.reload();
+                },
+                error: function (xhr, errmsg, err) {
+                    console.error(errmsg);
+                }
+            });
         });
-    });   
-</script>
+    </script>
 
 {% endblock %}

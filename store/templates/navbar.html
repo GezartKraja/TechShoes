@@ -1,7 +1,11 @@
 <!-- Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2a557f;">
+
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{% url 'home' %}">Django Ecommerce</a>
+        <a class="navbar-brand" href="{% url 'home' %}">
+    <img src="https://cdn-icons-png.flaticon.com/512/2589/2589903.png" alt="TechShoes Logo" style="height: 24px; margin-right: 5px;"> TechShoes
+</a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
                 class="navbar-toggler-icon"></span></button>
@@ -21,18 +25,18 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="{% url 'home' %}">All Categories</a></li>
                         <li><hr class="dropdown-divider"/></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'moviebooks' %}">Movie books</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Books' %}">Books</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category' 'Men' %}">Men</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category' 'Women' %}">Women</a></li>
                     </ul>
                 </li>
             </ul>
             <form class="d-flex">
-                <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart
-                    <span class="badge bg-black   ms-1 rounded-pill" id="cart_quantity"> {{ cart|length }}</span>
+               <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
+    <i class="bi bi-basket-fill me-1"></i> <!-- Change the cart icon class here -->
+    <span class="d-none d-sm-inline">Cart</span>
+    <span class="badge bg-dark text-white ms-2 rounded-pill" id="cart_quantity">{{ cart|length }}</span>
+</a>
 
-                </a>
             </form>
         </div>
     </div>

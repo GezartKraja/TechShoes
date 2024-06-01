@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
+    <br><br><br><br><br><br>
+    <div class="container d-flex justify-content-center">
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4 align-self-center">
@@ -23,11 +24,10 @@
                             ${{ product.price }}<br>ID: {{ product.id }}
                         {% endif %}
                         <br><br>
-                        <div class="row justify-content-center">
-                            <div class="col-md-2 align-self-center">Quantity:</div>
-                            <div class="col-md-2 d-flex justify-content-center align-items-center">
-                                <select class="form-select form-select-sm w-auto
-                                " id="qty-cart">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-md-4">Quantity:</div>
+                            <div class="col-md-8 d-flex justify-content-center align-items-center">
+                                <select class="form-select form-select-sm w-auto" id="qty-cart">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -37,16 +37,15 @@
                             </div>
                         </div>
                         <br><br>
-                        <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
-                        <button type="button" value="{{ product.id }}" class="btn btn-secondary" id="add-cart">Add To
-                            Cart
-                        </button>
+                        <a href="{% url 'home' %}" class="btn btn-primary" style="background-color: #326b9e;">Home</a>
+                        <button type="button" value="{{ product.id }}" class="btn btn-primary" id="add-cart" style="background-color: #326b9e;">Add To Cart</button>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
     <script>
         $(document).on('click', '#add-cart', function (e) {
