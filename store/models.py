@@ -35,9 +35,12 @@ class Product(models.Model):
     # Add Sale Stuff
     is_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+
+
 
 
 # Customers Orders
@@ -52,3 +55,11 @@ class Order(models.Model):
 
     def __str__(self):
         return self.product
+
+class About(models.Model):
+    description1 = models.TextField()
+    description2 = models.TextField()
+    description3 = models.TextField()
+
+    def __str__(self):
+        return self.description1

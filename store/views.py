@@ -1,6 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, redirect
-from .models import Product, Category
+from .models import Product, Category, About
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -30,7 +30,8 @@ def home(request):
 
 
 def about(request):
-    return render(request, 'about.html')
+    about = About.objects.all().first()
+    return render(request, 'about.html', {'about': about})
 
 
 def login_user(request):
@@ -44,7 +45,7 @@ def login_user(request):
                 messages.success(request, 'You are now logged in')
                 return redirect('home')
         else:
-            messages.success(request, 'There is an error! You are not logged in')
+            messages.error(request, 'There is an error! You are not logged in')
             return redirect('login')
     else:
         return render(request, 'login.html')
