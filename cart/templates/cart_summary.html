@@ -5,8 +5,8 @@
     <header class="py-5" style="background-color: #1c3650;">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Shopping Cart</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Your cart</p>
+                <h1 class="display-4 fw-bolder">Shporta e Blerjes</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Shporta juaj</p>
             </div>
         </div>
     </header>
@@ -27,7 +27,7 @@
 
                                 {% if product.is_sale %}
                                     <div class="badge bg-dark text-white position-absolute"
-                                         style="top: 0.5rem; right: 0.5rem">Sale
+                                         style="top: 0.5rem; right: 0.5rem">Zbritje
                                     </div>
                                     <strike>${{ product.price }}</strike>&nbsp;&nbsp;
                                     ${{ product.sale_price }}
@@ -36,7 +36,7 @@
                                 {% endif %}
                                 <br><br>
                                 <div class="row justify-content-center">
-                                    <div class="col-md-2 align-self-center ">Quantity:</div>
+                                    <div class="col-md-2 align-self-center ">Sasia:</div>
                                     <div class="col-md-4 d-flex justify-content-center align-items-center">
                                         <select class="form-select form-select-sm w-auto" id="select{{ product.id }}">
                                             <option selected>
@@ -55,12 +55,12 @@
                                     </div>
                                 </div>
                                 <br><br>
-                                <a href="{% url 'home' %}" class="btn btn-primary" style="background-color: #326b9e;">Home</a>
+                                <a href="{% url 'home' %}" class="btn btn-primary" style="background-color: #326b9e;">Faqja kresore</a>
                                 <button type="button" data-index="{{ product.id }}" class="btn btn-primary update-cart"
-                                        style="background-color:green;">Update
+                                        style="background-color:green;">Perditsim
                                 </button>
                                 <button type="button" data-index="{{ product.id }}"
-                                        class="btn btn-danger delete-product">Delete
+                                        class="btn btn-danger delete-product">Hiq
                                 </button>
 
                             </div>
@@ -69,17 +69,19 @@
                 </div>
 
             {% endfor %}
+            <div align="right"></div>
             <h3>Total: ${{ totals }} </h3>
+            <a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a>
             <br><br>
         {% else %}
-            There's nothing in your Cart
+            Ti nuk ke asgje ne shporte!
             <br><br><br><br><br><br><br><br><br><br><br><br>
         {% endif %}
     </div>
     <br><br>
 
     <script>
-        // Update Cart 
+        // Update Cart
         $(document).on('click', '.update-cart', function (e) {
             e.preventDefault();
             var productid = $(this).data('index');
@@ -104,7 +106,7 @@
         });
 
 
-        // Delete item from Cart 
+        // Delete item from Cart
         $(document).on('click', '.delete-product', function (e) {
             e.preventDefault();
 

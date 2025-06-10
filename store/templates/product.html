@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+ {% extends 'base.html' %}
 
 {% block content %}
     <br><br><br><br><br><br>
@@ -25,7 +25,7 @@
                         {% endif %}
                         <br><br>
                         <div class="row justify-content-center align-items-center">
-                            <div class="col-md-4">Quantity:</div>
+                            <div class="col-md-4">Sasia:</div>
                             <div class="col-md-8 d-flex justify-content-center align-items-center">
                                 <select class="form-select form-select-sm w-auto" id="qty-cart">
                                     <option value="1">1</option>
@@ -37,9 +37,11 @@
                             </div>
                         </div>
                         <br><br>
-                        <a href="{% url 'home' %}" class="btn btn-primary" style="background-color: #326b9e;">Home</a>
-                        <button type="button" value="{{ product.id }}" class="btn btn-primary" id="add-cart" style="background-color: #326b9e;">Add To Cart</button>
+                        <a href="{% url 'home' %}" class="btn btn-primary" style="background-color: #326b9e;">Faqja Kryesore</a>
+                        <button type="button" value="{{ product.id }}" class="btn btn-primary" id="add-cart" style="background-color: #326b9e;">Shto ne shporte!</button>
 
+                        <!-- Placeholder for the success message -->
+                        <div id="success-message" class="mt-3 text-success" style="display: none;"></div>
                     </div>
                 </div>
             </div>
@@ -47,25 +49,41 @@
     </div>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
-    <script>
-        $(document).on('click', '#add-cart', function (e) {
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '{% url "cart_add" %}',
-                data: {
-                    product_id: $(this).val(),
-                    product_qty:$('#qty-cart option:selected').text(),
-                    csrfmiddlewaretoken: '{{ csrf_token }}',
-                    action: 'post'
-                },
-                success: function (json) {
-                    document.getElementById('cart_quantity').textContent = json.qty;
-                },
-                error: function (xhr, errmsg, err) {
-                    console.error(errmsg);
-                }
-            });
-        });
-    </script>
+<script>
+// Check if button pressed
+$(document).on('click', '#add-cart', function(e){
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url 'cart_add' %}',
+        data: {
+    product_id: $('#add-cart').val(),
+    product_qty: $('#qty-cart option:selected').text(),
+    csrfmiddlewaretoken: '{{ csrf_token }}',
+    action: 'post'
+        },
+
+        success: function(json){
+            //console.log(json)
+            document.getElementById("cart_quantity").textContent = json.qty
+            location.reload();
+        },
+
+        error: function(xhr, errmsg, err){
+
+        }
+
+
+    });
+
+
+
+})
+
+
+
+
+</script>
+
+
 {% endblock %}

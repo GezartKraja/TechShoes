@@ -5,8 +5,8 @@
 <header class=" py-5" style="background-color: #1c3650;">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Regjistroju</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Regjistroju ketu!</p>
+            <h1 class="display-4 fw-bolder">Perditso profilin</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Perditso profilin e userit</p>
         </div>
     </div>
 </header>
@@ -15,15 +15,22 @@
     <div class="row ">
         <div class="col-8 offset-2">
             <br/><br/>
-            <form method="POST" action="{% url 'register' %}">
+            <form method="POST" action="{% url 'update_user' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ user_form.as_p }}
                 
                 <br/><br/>
                 <div class="text-center">
-                <button type="submit" class="btn btn-secondary">Regjistroju</button>
+                <button type="submit" class="btn btn-secondary">Perditso profilin</button>
                 </div>
             </form>
+            <br/><br/>
+            <br/><br/>
+            <div class="text-center">
+            <a href="{% url 'update_password' %}" class="btn btn-secondary">Përditëso passwordin</a>
+            </div>
+
+            
             <br/><br/>
             <br/><br/>
             <br/><br/>

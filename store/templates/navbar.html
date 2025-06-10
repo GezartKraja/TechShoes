@@ -1,42 +1,73 @@
-<!-- Navbar-->
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2a557f;">
-
     <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{% url 'home' %}">
-    <img src="https://cdn-icons-png.flaticon.com/512/2589/2589903.png" alt="TechShoes Logo" style="height: 24px; margin-right: 5px;"> TechShoes
-</a>
+        <!-- Logo -->
+        <a class="navbar-brand text-white" href="{% url 'home' %}">
+            <img src="https://upload.wikimedia.org/wikipedia/sq/thumb/5/54/UPT_logo.svg/768px-UPT_logo.svg.png?20130329224409" alt="Logo" style="height: 24px; margin-right: 5px;">
+            UPT Shoes
+        </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
-                class="navbar-toggler-icon"></span></button>
+        <!-- Mobile toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar content -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                <!-- Main links -->
+                <li class="nav-item"><a class="nav-link text-white" href="{% url 'home' %}">Faqja Kryesore</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="{% url 'about' %}">Rreth Nesh</a></li>
+
                 {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+                    <!-- Profile Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" id="navbarDropdownProfile" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">Profili</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
+                            <li><a class="dropdown-item" href="{% url 'update_user' %}">Profili i Përdoruesit</a></li>
+                            <li><hr class="dropdown-divider"/></li>
+                            <li><a class="dropdown-item" href="{% url 'update_info' %}">User Info</a></li>
+                        </ul>
+                    </li>
+
+{#                    {% if user.is_superuser %}#}
+{#                        <!-- Orders Dropdown -->#}
+{#                        <li class="nav-item dropdown">#}
+{#                            <a class="nav-link dropdown-toggle text-white" id="navbarDropdownOrders" href="#" role="button"#}
+{#                               data-bs-toggle="dropdown" aria-expanded="false">Porositë</a>#}
+{#                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownOrders">#}
+{##}
+{#                            </ul>#}
+{#                        </li>#}
+{#                    {% endif %}#}
+
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'logout' %}">Dil</a></li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Log in</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'login' %}">Hyr</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'register' %}">Regjistrohu</a></li>
                 {% endif %}
+
+                <!-- Categories Dropdown -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">Categories</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'home' %}">All Categories</a></li>
-                        <li><hr class="dropdown-divider"/></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Men' %}">Men</a></li>
-                        <li><a class="dropdown-item" href="{% url 'category' 'Women' %}">Women</a></li>
+                    <a class="nav-link dropdown-toggle text-white" id="navbarDropdownCategories" href="#" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Kategoritë</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
+                        <li><a class="dropdown-item" href="{% url 'category' 'Men' %}">Meshkuj</a></li>
+                        <li><a class="dropdown-item" href="{% url 'category' 'Women' %}">Femra</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex">
-               <a href="{% url 'cart_summary' %}" class="btn btn-outline-dark">
-    <i class="bi bi-basket-fill me-1"></i> <!-- Change the cart icon class here -->
-    <span class="d-none d-sm-inline">Cart</span>
-    <span class="badge bg-dark text-white ms-2 rounded-pill" id="cart_quantity">{{ cart|length }}</span>
-</a>
 
+            <!-- Cart Icon -->
+            <form class="d-flex">
+                <a href="{% url 'cart_summary' %}" class="btn btn-outline-light">
+                    <i class="bi bi-basket-fill me-1"></i>
+                    <span class="d-none d-sm-inline">Shporta</span>
+                    <span class="badge bg-dark text-white ms-2 rounded-pill" id="cart_quantity">{{ cart|length }}</span>
+                </a>
             </form>
         </div>
     </div>
